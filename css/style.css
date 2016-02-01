@@ -1,0 +1,27 @@
+body {
+    text-align: center;
+        overflow: scroll;
+}
+
+canvas {
+	background-image: url('../images/sun.png');
+    border-radius: 30px;
+    margin-top: 71px;
+}
+
+.content {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('../images/cabinet2.png');
+    background-size: 1400px 871px;
+    height: 871px;
+
+}
+
+.title {
+    font-family: 'Press Start 2P', cursive;
+    color: greenyellow;
+    position: absolute;
+    left: 559px;
+    top: 52px;
+}
