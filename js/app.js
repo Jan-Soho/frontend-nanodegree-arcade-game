@@ -1,4 +1,6 @@
-'use strict';
+(function () {
+  'use strict';
+}());
 
 // GLOBAL VARIABLES
 
@@ -33,7 +35,7 @@ function getRandomInt(min, max) {
 
 // Check if number is even or odd
 function isEven(value) {
-    if (value % 2 == 0)
+    if (value % 2 ==+ 0)
         return true;
     else
         return false;
@@ -47,7 +49,7 @@ var Game = function(player, scenario, allowedKeys) {
     this.scenario = scenario;
     this.counter = 0;
     this.allowedKeys = allowedKeys_directional;
-}
+};
 
 
 // @update FUNCTION for Game : Backbone of the game
@@ -106,7 +108,7 @@ Game.prototype.update = function(dt) {
                     this.player.life--;
                     this.player.changeImage();
                     this.scenario = 'default';
-                };
+                }
             }
 
             allEnemies.forEach(function(enemy) {
@@ -175,10 +177,10 @@ Game.prototype.update = function(dt) {
 
             // ENEMY
             // Randomly searching for an enemy on screen when player hit enter
-            if (chosenOne == null) {
+            if (chosenOne === null) {
                 allEnemies.forEach(function(enemy) {
                     // Searching for an enemy not 'offscreen'
-                    if (enemy.x > 0 && enemy.x < 425 && enemy.y != null) {
+                    if (enemy.x > 0 && enemy.x < 425 && enemy.y !== null) {
                         // We stock that enemy in a global temporary variable
                         chosenOne = enemy;
                         return false;
@@ -195,7 +197,7 @@ Game.prototype.update = function(dt) {
             });
 
             // Bug who's been shot is animated
-            if (chosenOne != null) {
+            if (chosenOne !== null) {
                 // When animation is finished, scenario go back to revengeWater
                 if (chosenOne.animate(0, 'itHurts')) {
                     this.scenario = 'revengeWater';
@@ -204,7 +206,7 @@ Game.prototype.update = function(dt) {
             break;
     }
 
-}
+};
 
 
 // Enemy CONSTRUCTOR, for enemies our player must avoid.
@@ -263,7 +265,7 @@ Enemy.prototype.animate = function(time, type, data) {
     var counter2 = this.animation.animationTick2;
 
     // If animation hasn't started yet, we store the enemy position we're the animation start
-    if (counter == 0) {
+    if (counter === 0) {
         this.animation.animationPositionStart.push(this.x, this.y);
     }
 
@@ -299,7 +301,7 @@ Enemy.prototype.animate = function(time, type, data) {
             // Player
             // Taking care of the player shotgun animation
             // Each 8 ticks, sprite alternate's between the 2 images of alternateImages2
-            if (counter2 % 8 == 0) {
+            if (counter2 % 8 === 0) {
                 player.animation.alternateImages.reverse();
             }
             // We want the player animation to stop before the enemy animation (which can be more than 32 tick's, depending on the enemy postiion)
@@ -316,14 +318,14 @@ Enemy.prototype.animate = function(time, type, data) {
             this.x += getRandomInt(0, 3);
             // We wait till the enemy goes off-screen to stop the animation
             if (this.y > 550) {
-                return true;
                 this.animation.animationTick2 = 0;
+                return true;
             }
             break;
     }
 
 
-}
+};
 
 // @render function for Enemy, simply render's the enemy
 Enemy.prototype.render = function() {
@@ -351,7 +353,7 @@ var Player = function(x, y) {
         'alternateImages': ['images/char-boy.png', 'images/char-boy-dead-dirty2.png'],
         'floatingData': [1.5, -1.5, -1.5, 1.5]
     };
-}
+};
 
 // @update FUNCTION for Player, update the player's position and check for collision
 Player.prototype.update = function() {
@@ -373,7 +375,7 @@ Player.prototype.update = function() {
         this.x = 150;
     }
 
-}
+};
 
 // @reset FUNCTION for Player, reset's most of the player's data
 // @type parameter for choosing which property we want to reset
@@ -398,7 +400,7 @@ Player.prototype.reset = function(type) {
             this.sprite = 'images/char-boy.png';
             break;
     }
-}
+};
 
 
 // @animate FUNCTION for Player, create a chosen animation depending on game scenario.
@@ -414,7 +416,7 @@ Player.prototype.animate = function(time, type, data) {
     var counter = this.animation.animationTick;
 
     // If animation hasn't started yet, we store the position we're the animation start
-    if (counter == 0) {
+    if (counter === 0) {
         this.animation.animationPositionStart.push(this.x, this.y);
     }
 
@@ -443,7 +445,7 @@ Player.prototype.animate = function(time, type, data) {
         case 'skeletonBlink':
             // Each '@data' number of ticks, we change players image creating a blink effect
             // Each image has to stay a '@data' number of ticks before switching
-            if (counter % data == 0) {
+            if (counter % data === 0) {
                 this.animation.alternateImages.reverse();
             }
             this.sprite = this.animation.alternateImages[0];
@@ -459,7 +461,7 @@ Player.prototype.animate = function(time, type, data) {
 
             // Each '@data' ticks we change players image switching position values inside the animationfloatingData array
 
-            if (counter % data == 0 && counter != 0) {
+        if (counter % data === 0 && counter !== 0) {
                 this.animation.animationTick2++;
                 subcounter++;
             }
@@ -473,7 +475,7 @@ Player.prototype.animate = function(time, type, data) {
 
             break;
     }
-}
+};
 
 
 
@@ -489,15 +491,15 @@ Player.prototype.checkCollision = function() {
             return true;
         }
 
-    };
-}
+    }
+};
 
 // @playerWater FUNCTION for Player, check if Player reach's the water.
 Player.prototype.playerWater = function() {
     if (this.y < 0) {
         return true;
     }
-}
+};
 
 
 // @changeImage FUNCTION for Player, handles the different sprites mode depending on how many life is left
@@ -515,7 +517,7 @@ Player.prototype.changeImage = function() {
             break;
     }
 
-}
+};
 
 // @handleInput FUNCTION for Player, moves the player, depending on choice parameters and scenario's
 //
@@ -576,7 +578,7 @@ var Messages = function(font, color, align, text, coords) {
     ctx.fillStyle = color;
     ctx.textAlign = align;
     ctx.fillText(text, coords[0], coords[1]);
-}
+};
 
 // @renderMessages FUNCTION for Messages, instanciate all texts appearing on screen, depending on game scenario
 function renderMessages() {
