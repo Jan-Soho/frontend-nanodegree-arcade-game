@@ -12,8 +12,7 @@ But he first has to reach the beach by crossing the street and avoiding them.
 ###HOW TO PLAY
 
 The game can be downloaded from my github account
-https://github.com/Jan-Soho/frontend-nanodegree-arcade-game
-Or played at
+https://github.com/Jan-Soho/frontend-nanodegree-arcade-game or played at
 http://jan-soho.github.io/frontend-nanodegree-arcade-game/
 
 Launch index.html to play.
